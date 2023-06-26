@@ -30,11 +30,12 @@ class PostController {
             res.status(500).json(error + 'error')
         } 
     }
+ 
     async vote (req,res) { 
         try {
-
-            const updatedPost = await PostService.vote(req.body)
-            res.status(200).json(updatedPost)
+         
+            const updatedUser = await PostService.vote(req.params)
+            res.status(200).json(updatedUser)
             
         } catch (error) {
             res.status(500).json(error)

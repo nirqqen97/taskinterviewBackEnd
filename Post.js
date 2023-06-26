@@ -4,8 +4,8 @@ const Post = mongoose.Schema( {
     author : {type : String, required : true},
     description : {type : String, required : true},
     platform : {type : String, required : true},
-    upvote : {type : Number, },
-    downvote : {type : Number, },
+    upvote : {type : Number, default : 0 },
+    downvote : {type : Number, default : 0},
     picture : {type : String, required : true}
 })
 

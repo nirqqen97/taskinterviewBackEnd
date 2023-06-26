@@ -11,7 +11,7 @@ class PostService {
     async getAll () { 
                 
             const posts = await Post.find()
-            console.log("check")
+            
             return posts
       
       
@@ -27,18 +27,30 @@ class PostService {
       
     }
 
-    async vote (post) { 
-      
-            if (!post._id) {
-                throw new Error("id  is not specified")
-            }
-            const updatedPost = await Post.findByIdAndUpdate(post._id, post, {new : true})
-            return updatedPost
+    async vote ({streamerId,vote}) { 
+        console.log('id: ', streamerId);
        
+            const user = await Post.findById(streamerId)
+
+            if (!user) {   
+            throw new Error("User no found")
+            }
+            if (vote === "upvote") {
+                user.upvote++;
+              } else if (vote === "downvote") {
+                user.downvote++;
+              } else {
+                throw new Error("Invalid vote value");
+              }
+            await user.save();
+            return user
+           
             
        
-    }
+           
+         
 
+}
 }
 
 
