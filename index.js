@@ -12,9 +12,15 @@ const app = express()
 app.use(express.json())
 app.use("/streamers", router)
 
-async function startApp() {
+const connectDB = async () => { 
     try {
         await mongoose.connect(URL)
+    } catch (error) {
+        console.log(error)
+    }
+}
+async function startApp() {
+    try {
         app.listen(PORT, (() => {
         console.log("server started")
 }))
@@ -25,4 +31,5 @@ async function startApp() {
     
 }
 
-startApp()
+connectDB().then(startApp())
+
